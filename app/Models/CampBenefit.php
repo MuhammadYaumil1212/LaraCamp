@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CampBenefit extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['camp_id','name'];
+    protected $table = 'camp_benefits';
 }

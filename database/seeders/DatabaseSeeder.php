@@ -13,8 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       $this->call(
-           CampTableSeeder::class
-       );
+       $this->call([
+           CampTableSeeder::class,
+           CampBenefitTableSeeder::class,
+           AdminUserSeeder::class
+       ]);
     }
 }
