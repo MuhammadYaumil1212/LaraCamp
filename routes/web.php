@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\checkoutController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,14 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/checkout', function(){
-    return view('checkout');
-})->name('checkout');
-
-Route::get('/successCheckout', function(){
-    return view('success_checkout');
-})->name('successCheckout');
+Route::get('/checkout/success',[checkoutController::class,'success'])->name('checkout.success');
+Route::get('/checkout/{camp:slug}',[checkoutController::class,'create'])->name('checkout.create');
+Route::post('/checkout/{camp}',[checkoutController::class,'store'])->name('checkout.store');
 //socialite routes
 Route::get('sign-in-google',[UserController::class,'google'])->name('user.login.google');
 Route::get('auth/google/callback',[UserController::class,'handleProviderCallback'])->name('user.google.callback');

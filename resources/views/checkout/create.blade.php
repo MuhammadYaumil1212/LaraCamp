@@ -19,7 +19,7 @@
                           <div class="item-bootcamp">
                               <img src="/assets/images/item_bootcamp.png" alt="" class="cover">
                               <h1 class="package">
-                                  GILA BELAJAR
+                                  {{$camp->title}}
                               </h1>
                               <p class="description">
                                   Bootcamp ini akan mengajak Anda untuk belajar penuh mulai dari pengenalan dasar sampai membangun sebuah projek asli
@@ -28,38 +28,39 @@
                       </div>
                       <div class="col-lg-1 col-12"></div>
                       <div class="col-lg-6 col-12">
-                          <form action="{{route('successCheckout')}}" class="basic-form">
+                          <form action="{{route('checkout.store', $camp->id)}}" method="post" class="basic-form">
+                                @csrf
                               <div class="mb-4">
-                                  <label for="exampleInputEmail1" class="form-label">Full Name</label>
-                                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                  <label class="form-label">Full Name</label>
+                                  <input type="text" class="form-control" name="name" id="exampleInputEmail1" value={{Auth::User()->name}}>
                               </div>
                               <div class="mb-4">
-                                  <label for="exampleInputEmail1" class="form-label">Email Address</label>
-                                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                  <label class="form-label">Email Address</label>
+                                  <input type="email" name="email" class="form-control" id="exampleInputEmail1" value={{Auth::User()->email}}>
                               </div>
                               <div class="mb-4">
-                                  <label for="exampleInputEmail1" class="form-label">Occupation</label>
-                                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                  <label class="form-label">Occupation</label>
+                                  <input type="text" name="occupation" class="form-control" id="exampleInputEmail1" value={{Auth::User()->occupation}}>
                               </div>
                               <div class="mb-4">
-                                  <label for="exampleInputEmail1" class="form-label">Card Number</label>
-                                  <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                  <label class="form-label">Card Number</label>
+                                  <input type="number" name="card_number" class="form-control" id="exampleInputEmail1">
                               </div>
                               <div class="mb-5">
                                   <div class="row">
                                       <div class="col-lg-6 col-12">
-                                          <label for="exampleInputEmail1" class="form-label">Expired</label>
-                                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                          <label class="form-label">Expired</label>
+                                          <input type="month" name="expired" class="form-control" id="exampleInputEmail1">
                                       </div>
                                       <div class="col-lg-6 col-12">
-                                          <label for="exampleInputEmail1" class="form-label">CVC</label>
-                                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                          <label class="form-label">CVC</label>
+                                          <input type="text" class="form-control" name="cvc" id="exampleInputEmail1">
                                       </div>
                                   </div>
                               </div>
                               <button type="submit" class="w-100 btn btn-primary">Pay Now</button>
                               <p class="text-center subheader mt-4">
-                                  <img src="/assets/images/ic_secure.svg" alt=""> Your payment is secure and encrypted.
+                                  <img src="/assets/images/ic_secure.svg"> Your payment is secure and encrypted.
                               </p>
                           </form>
                       </div>
