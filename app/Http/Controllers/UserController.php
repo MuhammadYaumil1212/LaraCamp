@@ -28,6 +28,6 @@ class UserController extends Controller
         ];
         $user = User::firstOrCreate(['email'=>$data['email']],$data);
         Auth::login($user,true);
-        return redirect('/');
+        return redirect('/dashboard');
     }
 }
