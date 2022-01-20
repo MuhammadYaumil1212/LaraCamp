@@ -4,10 +4,13 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Checkout\Store;
+use App\Mail\Checkout\AfterCheckout;
 use App\Models\Camp;
 use App\Models\Checkout;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Mail;
+
 class checkoutController extends Controller
 {
     /**
@@ -29,7 +32,7 @@ class checkoutController extends Controller
     {
         if($camp->isRegistered){
             $request->session()->flash('error',"you have already registered on {$camp->title} camp.");
-            return redirect(route('dashboard'));
+            return redirect(route('user.dashboard'));
         }
         return view('checkout.create',compact('camp'));
     }
@@ -42,19 +45,20 @@ class checkoutController extends Controller
      */
     public function store(Store $request, Camp $camp)
     {
-        return $request->all();
         //mapping request data
         $data = $request->all();
-        $data['user_id'] = Auth::id();
+        $data['user_id'] = FacadesAuth::id();
         $data['camp_id'] = $camp->id;
         //update user data
-        $user = Auth::user();
+        $user = FacadesAuth::user();
         $user->email = $data['email'];
         $user->name = $data['name'];
         $user->occupation = $data['occupation'];
         $user->save();
         //create table checkout
         $checkout = Checkout::create($data);
+        //send email
+        $mailDump = Mail::to(FacadesAuth::user()->email)->send(new AfterCheckout($checkout));
         return redirect(route('checkout.success'));
     }
 

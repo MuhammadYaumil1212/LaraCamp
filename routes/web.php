@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\admin\AdminCheckout;
+use App\Http\Controllers\User\DashboardController as UserDashboard;
+use App\Http\Controllers\admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\checkoutController;
 use App\Http\Controllers\UserController;
@@ -25,14 +28,22 @@ Route::get('auth/google/callback',[UserController::class,'handleProviderCallback
 //Home Routes
 Route::middleware(['auth'])->group(function(){
     //checkout routes
-    Route::get('/checkout/success',[checkoutController::class,'success'])->name('checkout.success');
-    Route::get('/checkout/{camp:slug}',[checkoutController::class,'create'])->name('checkout.create');
-    Route::post('/checkout/{camp}',[checkoutController::class,'store'])->name('checkout.store');
-    //user dashboard
+    Route::get('/checkout/success',[checkoutController::class,'success'])->name('checkout.success')->middleware('EnsureUserRole:user');
+    Route::get('/checkout/{camp:slug}',[checkoutController::class,'create'])->name('checkout.create')->middleware('EnsureUserRole:user');
+    Route::post('/checkout/{camp}',[checkoutController::class,'store'])->name('checkout.store')->middleware('EnsureUserRole:user');
+    //dashboard
     Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard');
+    //user dashboard
+    Route::prefix('/user/dashboard')->namespace('User')->name('user.')->middleware('EnsureUserRole:user')->group(function(){
+        Route::get('/',[UserDashboard::class,'index'])->name('dashboard');
+    });
+    //admin dashboard
+    Route::prefix('/admin/dashboard')->namespace('Admin')->name('admin.')->middleware('EnsureUserRole:admin')->group(function(){
+        Route::get('/',[AdminDashboard::class,'index'])->name('dashboard');
+        Route::post('/admin/{checkout}',[AdminCheckout::class,'update'])->name('checkout.update');
+    });
 });
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+// Route::get('/dashboard/checkout/invoice/{checkout}',[checkoutController::class,'invoice'])->name('user.checkout.invoice');
