@@ -29,9 +29,8 @@ class Store extends FormRequest
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,'. Auth::id() .',id',
             'occupation' =>'required|string',
-            'card_number' => 'required|numeric|digits_between:8,16',
-            'cvc' => 'required|numeric|digits:3',
-            'expired'=> 'required|date|date_format:Y-m|after_or_equal:'. $expired_validation
+            'phone' =>'required|numeric',
+            'address' =>'required|string',
         ];
     }
 }
