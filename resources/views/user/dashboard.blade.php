@@ -34,10 +34,15 @@
                         <strong>${{$checkout->Camp->price}}k</strong>
                     </td>
                     <td>
-                        @if ($checkout->is_paid)
-                            <strong class="text-success">Payment Successfully</strong>    
-                            @else
-                            <strong class="text-warning">Waiting Payment</strong>    
+                        @if ($checkout->payment_status == 'paid')
+                            <strong class="text-success">{{$checkout->payment_status}}</strong>
+                        @else
+                            <strong>{{$checkout->payment_status}}</strong>
+                        @endif
+                    </td>
+                    <td>
+                        @if ($checkout->payment_status == 'waiting')
+                        <a href="{{$checkout->midtrans_url}}" class="btn btn-primary">Pay</a>
                         @endif
                     </td>
                     <td>
