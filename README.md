@@ -17,7 +17,7 @@ That's all from us, we hope you enjoy our web app.
 
 ## Versions
 
-1. 21/1/2022 - V1.1.0
+21/1/2022 - V1.1.0
 
 ## How to run this Website
 1. Download / clone via gitbash
