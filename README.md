@@ -1,9 +1,5 @@
 <p align="center"><img src = "/public/assets/images/logo.png"></p>
 
-<p align="center">
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://github.com/MuhammadYaumil1212/LaraCamp.git" alt="Total Downloads"></a>
-</p>
-
 ## About Laracamp
 
 Laracamp is a training application that uses an online bootcamp case study in which there is an online bootcamp registration feature, a syllabus list feature, a comment feature, a mentoring session feature, and so on. In addition, you can choose the bootcamp option then register your data after that, make a payment via payment gateway midtrans which is integrated in it.
