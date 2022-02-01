@@ -16,7 +16,7 @@ That's all from us, we hope you enjoy our web app.
 21/1/2022 - V1.1.0
 
 ## How to run this Website
-1. Download / clone via gitbash
+1. Download / clone via command / gitbash
 2. Import database to your database manager (you can download database <a href="https://www.mediafire.com/file/ikz6k54ksbjcw4m/laracamp.sql/file">Here</a> or you can migrate tables from project)
 3. After that, open a command prompt, then navigate to the project folder
 4. then, type "php artisan serve"
